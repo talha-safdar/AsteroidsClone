@@ -1,0 +1,6 @@
+Attributions:
+Images:
+AsteroidsClone\data\media\images
+{
+	space.jpg: Photo by Kaveh Keshtiara: https://www.pexels.com/photo/stars-in-the-night-sky-13179963/
+}
