@@ -13,11 +13,20 @@ int main()
 				window.setFramerateLimit(60); // manual fps (forced)
 				// Textures
 				sf::Texture mainBackground;
-				if (mainBackground.loadFromFile("data/media/images/space2.jpg") == false) {
+				if (mainBackground.loadFromFile("data/media/images/space.jpg") == false) {
 								std::cout << "Loading failed" << std::endl;
 								// also add visual error
 				}
 				mainBackground.setSmooth(true); // smoothness
+				std::cout << "x: " << window.getSize().x << std::endl;
+
+				// Circle for background
+				sf::CircleShape circle(window.getSize().x / 2 + 100, 30);
+				circle.setRadius(window.getSize().x / 2 + 100);
+				sf::FloatRect bounds = circle.getLocalBounds(); // very useful to get local size (left, top, width, height)
+				circle.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+				circle.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+				circle.setTexture(&mainBackground);
 
 				// Sprite
 				sf::Sprite background;
@@ -63,29 +72,25 @@ int main()
 												std::cout << "Up is currently held down" << std::endl; // the up arrow button
 								}
 
-								background.rotate(-0.03f);
+								circle.rotate(-0.17f);
 
-								std::cout << "Rotation: " << background.getRotation() << std::endl;
+								std::cout << "scaling: " << circle.getRotation() << std::endl;
 
-								if (background.getRotation() > (360 / 4) * 3) // more than 270
+								if (circle.getRotation() > (360 / 4) * 2) // more than 180
 								{
-												background.scale(1.0009f, 1.0009f);
+												//circle.scale(1.0009f, 1.0009f);
+												circle.scale(1.001f, 1.001f);
 								}
-								else if (background.getRotation() < (360 / 4) * 3 && background.getRotation() > (360 / 4) * 2)
+								else if (circle.getRotation() < (360 / 4) * 2)
 								{
-												background.scale(0.9991f, 0.9991f);
-								}
-								else if (background.getRotation() < (360 / 4) * 2 && background.getRotation() > (360 / 4) * 1)
-								{
-												background.scale(1.0015f, 1.0015f);
+												circle.scale(0.9991f, 0.9991f);
 								}
 
 
 
 								// RENDERING
 								window.clear(sf::Color(0, 0, 0));
-								window.draw(background);
-
+								window.draw(circle);
 
 
 								// DRAWING
