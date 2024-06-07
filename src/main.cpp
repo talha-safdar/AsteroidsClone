@@ -9,7 +9,7 @@ int main()
 {
 				// WINDOW
 				sf::VideoMode desktop = sf::VideoMode::getDesktopMode(); // Get the desktop resolution
-				sf::RenderWindow window(desktop, "Asteroids Clone", sf::Style::Default);
+				sf::RenderWindow window(sf::VideoMode(1920/2, 1080/2), "Asteroids Clone", sf::Style::Default);
 				window.setFramerateLimit(60); // manual fps (forced)
 				// Textures
 				sf::Texture mainBackground;
@@ -67,13 +67,17 @@ int main()
 
 								std::cout << "Rotation: " << background.getRotation() << std::endl;
 
-								if (background.getRotation() > 270)
+								if (background.getRotation() > (360 / 4) * 3) // more than 270
 								{
-												background.scale(1.001f, 1.001f);
+												background.scale(1.0009f, 1.0009f);
 								}
-								else if (background.getRotation() < 270 && background.getRotation() < 180)
+								else if (background.getRotation() < (360 / 4) * 3 && background.getRotation() > (360 / 4) * 2)
 								{
-												background.scale(-1.001f, -1.001f);
+												background.scale(0.9991f, 0.9991f);
+								}
+								else if (background.getRotation() < (360 / 4) * 2 && background.getRotation() > (360 / 4) * 1)
+								{
+												background.scale(1.0015f, 1.0015f);
 								}
 
 
