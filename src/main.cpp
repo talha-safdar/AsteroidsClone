@@ -10,12 +10,20 @@ int main()
 {
 				// WINDOW
 				sf::VideoMode desktop = sf::VideoMode::getDesktopMode(); // Get the desktop resolution
-				//sf::RenderWindow window(sf::VideoMode(1920/2, 1080/2), "Asteroids Clone", sf::Style::Default);
-				MainMenu mm;
+				sf::RenderWindow window(sf::VideoMode(1920/2, 1080/2), "Asteroids Clone", sf::Style::Default);
+				window.setFramerateLimit(60); // manual fps (forced)
+
+			//	MainMenu mm;
+				MainMenu mainMenu(window);
+				
+				while (window.isOpen()) {
+								mainMenu.run();
+								//window.display();
+				}
 
 				//window.setFramerateLimit(60); // manual fps (forced)
 
-				mm.getAssets();
+				//mm.getAssets();
 				//// Textures
 				//sf::Texture mainBackground;
 				//if (mainBackground.loadFromFile("assets/media/images/space.jpg") == false) {
@@ -55,30 +63,30 @@ int main()
 				//background.setPosition(windowSize.x / 2.f, windowSize.y / 2.f);
 
 
-				while (mm.getWindow().isOpen())
-				{
-								sf::Event event;
-								while (mm.getWindow().pollEvent(event))
-								{
-												if (event.type == sf::Event::Closed) 
-												{
-																mm.getWindow().close();
-												}
-												else if (event.type == sf::Event::KeyPressed) 
-												{
-																if (event.key.code == sf::Keyboard::Escape || event.type == sf::Keyboard::Up)
-																{
-																				mm.getWindow().close();
-																}
-												}
-								}
+				//while (mm.getWindow().isOpen())
+				//{
+				//				sf::Event event;
+				//				while (mm.getWindow().pollEvent(event))
+				//				{
+				//								if (event.type == sf::Event::Closed) 
+				//								{
+				//												mm.getWindow().close();
+				//								}
+				//								else if (event.type == sf::Event::KeyPressed) 
+				//								{
+				//												if (event.key.code == sf::Keyboard::Escape || event.type == sf::Keyboard::Up)
+				//												{
+				//																mm.getWindow().close();
+				//												}
+				//								}
+				//				}
 
-								// LOGIC
-								// press
-								if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
-								{
-												std::cout << "Up is currently held down" << std::endl; // the up arrow button
-								}
+								//// LOGIC
+								//// press
+								//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
+								//{
+								//				std::cout << "Up is currently held down" << std::endl; // the up arrow button
+								//}
 
 								// circle.rotate(-0.17f);
 
@@ -93,9 +101,10 @@ int main()
 								//{
 								//				circle.scale(0.9991f, 0.9991f);
 								//}
-
-
-								mm.render();
+								//mm.getWindow().clear(sf::Color(0, 0, 0));
+								//mm.logics();
+								//mm.render();
+								//mm.getWindow().display();
 								//// RENDERING
 								//mm.getWindow().clear(sf::Color(0, 0, 0));
 								//mm.getWindow().draw(circle);
@@ -104,7 +113,7 @@ int main()
 								//// DRAWING
 
 								//mm.getWindow().display();
-				}
+				// }
 				return 0;
 }
 
