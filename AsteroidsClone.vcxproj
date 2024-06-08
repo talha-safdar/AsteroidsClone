@@ -177,13 +177,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Helper\Group.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\states\mainmenu.cpp" />
-    <ClCompile Include="src\systems\game.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Helper\Group.hpp" />
     <ClInclude Include="src\states\mainmenu.hpp" />
-    <ClInclude Include="src\systems\game.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,89 +1,20 @@
-#include "mainmenu.hpp"
-
 #include <filesystem>
-//void MainMenu::getAssets()
+#include "mainmenu.hpp"
+#include "../Helper/Group.hpp"
 
-//ainMenu::MainMenu() : window(sf::VideoMode(1920 / 2, 1080 / 2), "Asteroids Clone", sf::Style::Default) {}
-
-//void MainMenu::getAssets() {
-//				// Textures
-//				sf::Texture mainBackground;
-//				std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/space2.jpg");
-//				std::cout << absolutePath << std::endl;
-//				if (mainBackground.loadFromFile(absolutePath.string()) == false) {
-//								std::cout << "Loading failed" << std::endl;
-//								// also add visual error
-//				}
-//				mainBackground.setSmooth(true); // smoothness
-//
-//				// Circle for background
-//				sf::CircleShape circle(window.getSize().x / 2 + 100, 30);
-//				circle.setRadius(window.getSize().x / 2 + 100);
-//				sf::FloatRect bounds = circle.getLocalBounds(); // very useful to get local size (left, top, width, height)
-//				circle.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
-//				circle.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-//				circle.setTexture(&mainBackground);
-//
-//				// Sprite
-//				sf::Sprite background;
-//				background.setTexture(mainBackground);
-//
-//				// set origin to the centre of the original image
-//				sf::FloatRect localBounds = background.getGlobalBounds();
-//				background.setOrigin(localBounds.width / 2.f, localBounds.height / 2.f);
-//
-//				// scale to fit the window
-//				background.setScale(
-//								window.getSize().x / localBounds.width,
-//								window.getSize().y / localBounds.height
-//				);
-//
-//				// set position to the centre of the window
-//				sf::Vector2u windowSize = window.getSize();
-//				background.setPosition(windowSize.x / 2.f, windowSize.y / 2.f);
-//}
-//
-//void MainMenu::logics() {
-//				std::cout << circle.getRotation() << std::endl;
-//				circle.rotate(-0.17f);
-//				if (circle.getRotation() > (360 / 4) * 2) // more than 180
-//				{
-//								//circle.scale(1.0009f, 1.0009f);
-//								circle.scale(1.001f, 1.001f);
-//				}
-//				else if (circle.getRotation() < (360 / 4) * 2)
-//				{
-//								circle.scale(0.9991f, 0.9991f);
-//				}
-//
-//}
-//
-//void MainMenu::render() {
-//				// RENDERING
-//				
-//				window.draw(circle);
-//
-//
-//				// DRAWING
-//
-//
-//}
-//
-//sf::RenderWindow& MainMenu::getWindow() {
-//				return window;
-//}
-
-
-MainMenu::MainMenu(sf::RenderWindow& window) : window(window) {
+MainMenu::MainMenu(sf::RenderWindow& window) : window(window) 
+{
     loadAssets();
 }
 
 // assets
-void MainMenu::loadAssets() {
+void MainMenu::loadAssets() 
+{
     // Textures
     std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/space.jpg");
     std::cout << absolutePath << std::endl;
-    if (mainBackground.loadFromFile(absolutePath.string()) == false) {
+    if (mainBackground.loadFromFile(absolutePath.string()) == false) 
+    {
         std::cout << "Loading failed" << std::endl;
         // also add visual error
     }
@@ -116,10 +47,39 @@ void MainMenu::loadAssets() {
     // set position to the centre of the window
     sf::Vector2u windowSize = window.getSize();
     background.setPosition(windowSize.x / 2.f, windowSize.y / 2.f);
+
+
+    // create button
+    Group* button = new Group();
+    button->setOrigin(localBounds.width / 2.f, localBounds.height / 2.f);
+
+    // it doesnt work with circle bcz it doesnt support draw like rectangle
+
+    sf::RectangleShape rec(sf::Vector2f(30, 30));
+    rec.setFillColor(sf::Color::Red);
+    button->addChild(rec);
+    root.addChild(rec);
+
+    /*
+    * // Usage:
+        Node rootNode;
+        Node* circleNode = new Node();
+        circleNode->setOrigin(50, 50); // Set circle's origin to its center for better rotation
+
+        sf::CircleShape circle(50);
+        circleNode->addChild(circle);
+
+        rootNode.addChild(circleNode); 
+
+        // Rotate the circleNode
+        circleNode->rotate(45); 
+    */
 }
 
-// input handling
-void MainMenu::run() {
+
+void MainMenu::run() 
+{
+    // input handling
     while (window.isOpen())
     {
         sf::Event event;
@@ -142,17 +102,16 @@ void MainMenu::run() {
     }
 }
 
-// logics
-void MainMenu::update() {
-    // LOGIC
-    // press
+// LOGICS
+void MainMenu::update() 
+{
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         std::cout << "Up is currently held down" << std::endl; // the up arrow button
     }
 
 
-    std::cout << circle.getRotation() << std::endl;
+    // std::cout << circle.getRotation() << std::endl;
     circle.rotate(-0.17f);
     if (circle.getRotation() > (360 / 4) * 2) // more than 180
     {
@@ -165,11 +124,13 @@ void MainMenu::update() {
     }
 }
 
-// render
-void MainMenu::render() {
+void MainMenu::render() 
+{
+    // rendering
     window.clear(sf::Color::Black);
 
-    window.draw(circle);
-
+    window.draw(root);
+    
+    // drawing
     window.display();
 }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "../Helper/Group.hpp"
 
 // to call funs like MainMenu::func();
 //namespace MainMenu {
@@ -32,6 +33,7 @@ private:
 				sf::Texture mainBackground;
 				sf::CircleShape circle;
 				sf::Sprite background;
+				Group root;
 
 				void loadAssets();
 				void update();
