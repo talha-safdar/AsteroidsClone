@@ -31,34 +31,37 @@ void MainMenu::loadAssets()
     circle.setTexture(&mainBackground);
 
     // Sprite
-    sf::Sprite background;
-    background.setTexture(mainBackground);
+    //sf::Sprite background;
+    //background.setTexture(mainBackground);
 
     // set origin to the centre of the original image
-    sf::FloatRect localBounds = background.getGlobalBounds();
-    background.setOrigin(localBounds.width / 2.f, localBounds.height / 2.f);
+    //sf::FloatRect localBounds = background.getGlobalBounds();
+    //background.setOrigin(localBounds.width / 2.f, localBounds.height / 2.f);
 
     // scale to fit the window
-    background.setScale(
-        window.getSize().x / localBounds.width,
-        window.getSize().y / localBounds.height
-    );
+    //background.setScale(
+    //    window.getSize().x / localBounds.width,
+    //    window.getSize().y / localBounds.height
+    //);
 
     // set position to the centre of the window
-    sf::Vector2u windowSize = window.getSize();
-    background.setPosition(windowSize.x / 2.f, windowSize.y / 2.f);
+    //sf::Vector2u windowSize = window.getSize();
+    //background.setPosition(windowSize.x / 2.f, windowSize.y / 2.f);
 
 
     // create button
-    Group* button = new Group();
-    button->setOrigin(localBounds.width / 2.f, localBounds.height / 2.f);
+    std::filesystem::path absolutePath1 = std::filesystem::absolute("assets/media/images/startBtn.png");
+    std::cout << absolutePath1 << std::endl;
+    if (startBtn.loadFromFile(absolutePath1.string()) == false)
+    {
+        std::cout << "Loading failed" << std::endl;
+        // also add visual error
+    }
+    startBtn.setSmooth(true); // smoothness
+    startBtnSprite.setTexture(startBtn);
+    startBtnSprite.setScale(sf::Vector2f(0.7, 0.7));
+    startBtnSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
-    // it doesnt work with circle bcz it doesnt support draw like rectangle
-
-    sf::RectangleShape rec(sf::Vector2f(30, 30));
-    rec.setFillColor(sf::Color::Red);
-    button->addChild(rec);
-    root.addChild(rec);
 
     /*
     * // Usage:
@@ -129,8 +132,9 @@ void MainMenu::render()
     // rendering
     window.clear(sf::Color::Black);
 
-    window.draw(root);
-    
+    window.draw(circle);
+    window.draw(startBtnSprite);
+
     // drawing
     window.display();
 }

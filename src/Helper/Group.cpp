@@ -13,11 +13,9 @@ void Group::addChild(sf::Drawable& child)
 * conrains
 */
 
-void Group::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
+void Group::draw(sf::RenderTarget& target, sf::RenderStates states) {
 				states.transform *= getTransform();
-				for (const auto& child : children)
-				{
+				for (const auto& child : children) {
 								target.draw(*child, states);
 				}
 }

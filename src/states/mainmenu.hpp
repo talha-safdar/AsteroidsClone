@@ -33,7 +33,13 @@ private:
 				sf::Texture mainBackground;
 				sf::CircleShape circle;
 				sf::Sprite background;
-				Group root;
+
+				// to separate this logic for button
+				sf::Texture startBtn;
+				sf::Sprite startBtnSprite;
+				//sf::RectangleShape buttonMiddle;
+				//sf::CircleShape buttonLeft;
+				//sf::CircleShape buttonRight;
 
 				void loadAssets();
 				void update();
