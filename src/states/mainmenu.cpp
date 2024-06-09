@@ -60,7 +60,9 @@ void MainMenu::loadAssets()
     startBtn.setSmooth(true); // smoothness
     startBtnSprite.setTexture(startBtn);
     startBtnSprite.setScale(sf::Vector2f(0.7, 0.7));
-    startBtnSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+    sf::FloatRect bounds2 = startBtnSprite.getLocalBounds();
+    startBtnSprite.setOrigin(bounds2.left + bounds2.width / 2.f, bounds2.top + bounds2.height / 2.f);
+    startBtnSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2 + 100);
 
 
     /*
@@ -92,11 +94,22 @@ void MainMenu::run()
             {
                 window.close();
             }
-            else if (event.type == sf::Event::KeyPressed)
+            else if (event.type == sf::Event::KeyPressed) // keyboard
             {
                 if (event.key.code == sf::Keyboard::Escape || event.type == sf::Keyboard::Up)
                 {
                     window.close();
+                }
+            }
+            else if (event.type == sf::Event::MouseButtonPressed) // mouse
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                    if (startBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+                    {
+                        std::cout << "Left mouse button was pressed" << std::endl;
+                    }
                 }
             }
         }
