@@ -109,6 +109,7 @@ void MainMenu::run()
                     if (startBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
                     {
                         std::cout << "Left mouse button was pressed" << std::endl;
+                        // handle the click
                     }
                 }
             }
