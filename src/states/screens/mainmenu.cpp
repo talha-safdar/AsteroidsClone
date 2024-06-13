@@ -4,12 +4,12 @@
 // #include "../../Helper/Group.hpp"
 // #include "../gameState.hpp"
 
-MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window),
+MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window)
       //window(window),     // Initialize the window reference member
-      mainBackground(),  
-      startBtn(),
-      background(mainBackground),
-      startBtnSprite(startBtn)
+      //mainBackground(),  
+      //startBtn()
+      //background(mainBackground)
+      //startBtnSprite(startBtn)
 {
     //loadAssets();
 }
@@ -51,14 +51,11 @@ void MainMenu::loadAssets()
     }
     startBtn.setSmooth(true); // smoothness
     startBtnSprite.setTexture(startBtn);
-    //startBtnSprite.setColor(sf::Color(255, 0, 0, 255)); // Red with full opacity
-    //startBtnSprite.setScale(sf::Vector2f(0.7, 0.7)); // Set the desired scale
+    startBtnSprite.setColor(sf::Color(255, 0, 0, 255)); // Red with full opacity
+    startBtnSprite.setScale(sf::Vector2f(0.7, 0.7)); // Set the desired scale
     sf::FloatRect bounds2 = startBtnSprite.getLocalBounds();
-    //startBtnSprite.setOrigin(bounds2.left + bounds2.width / 2.f, bounds2.top + bounds2.height / 2.f);
-    //startBtnSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2 + 100); // Set final position
-    startBtnSprite.setPosition(50, 50);
-    std::cout << "Button color: " << startBtnSprite.getColor().toInteger() << std::endl;
-
+    startBtnSprite.setOrigin(bounds2.left + bounds2.width / 2.f, bounds2.top + bounds2.height / 2.f);
+    startBtnSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2 + 100); // Set final position
 }
 
 void MainMenu::handleInput(sf::Event event) {
@@ -113,7 +110,7 @@ void MainMenu::render(sf::RenderWindow& window) {
     // rendering    // rendering
     window.clear(sf::Color::Black);
 
-    //window.draw(circle);
+    window.draw(circle);
     window.draw(startBtnSprite);
     // drawing
     window.display();
