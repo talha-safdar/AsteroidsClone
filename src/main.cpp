@@ -4,7 +4,8 @@
 */
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "states/mainmenu.hpp"
+#include "states/gameState.hpp"
+#include "states/screens/mainmenu.hpp"
 
 int main()
 {
@@ -14,9 +15,20 @@ int main()
 				window.setFramerateLimit(60); // manual fps (forced)
 
 				MainMenu mainMenu(window);
-				
+				std::unique_ptr<GameState> currentScene = std::make_unique<MainMenu>(window);
+				currentScene->loadAssets();
+				// std::unique_ptr<GameState> currentScene = std::make_unique < MainMenu();
+
+				sf::Clock clock;
+
 				while (window.isOpen()) {
-								mainMenu.run(); // main menu
+								sf::Event event;
+								while (window.pollEvent(event)) {
+												currentScene->handleInput(event);
+								}
+								sf::Time deltaTime = clock.restart();
+								currentScene->update(deltaTime);
+								currentScene->render(window);
 				}
 				return 0;
 }

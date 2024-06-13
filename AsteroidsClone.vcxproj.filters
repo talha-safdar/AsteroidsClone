@@ -18,18 +18,24 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\mainmenu.cpp">
+    <ClCompile Include="src\states\screens\mainmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Helper\Group.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\states\gameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\states\mainmenu.hpp">
+    <ClInclude Include="src\states\screens\mainmenu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Helper\Group.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\gameState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

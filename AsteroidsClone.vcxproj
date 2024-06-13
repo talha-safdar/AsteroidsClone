@@ -179,11 +179,13 @@
   <ItemGroup>
     <ClCompile Include="src\Helper\Group.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\states\mainmenu.cpp" />
+    <ClCompile Include="src\states\gameState.cpp" />
+    <ClCompile Include="src\states\screens\mainmenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Helper\Group.hpp" />
-    <ClInclude Include="src\states\mainmenu.hpp" />
+    <ClInclude Include="src\states\gameState.hpp" />
+    <ClInclude Include="src\states\screens\mainmenu.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
