@@ -4,25 +4,25 @@
 #include <SFML/Graphics.hpp>
 #include "../gameState.hpp"
 
-class MainMenu : public GameState {
+class GameScreen : public GameState {
 public:
-    MainMenu(sf::RenderWindow& window);
+    GameScreen(sf::RenderWindow& window);
 
     // GameState interface implementation
     void handleInput(sf::Event event) override;
     void update(sf::Time dt) override;
     void render(sf::RenderWindow& window) override;
     void loadAssets();
-    bool shouldSwitchToGameScreen() const override;
+    bool shouldSwitchToGameScreen() const;
     void resetSwitchToGameScreenFlag() override;
     GameStateType getNextSceneType() const override;
 
 private:
-    sf::Texture mainBackground;
-    sf::CircleShape circle;
-    sf::Sprite background;
-    sf::RectangleShape rect;
-    sf::Texture startBtn;
-    sf::Sprite startBtnSprite;
+    //sf::Texture mainBackground;
+    //sf::CircleShape circle;
+    //sf::Sprite background;
+    //sf::RectangleShape rect;
+    //sf::Texture startBtn;
+    //sf::Sprite startBtnSprite;
     bool switchToGameScreen = false;
 };

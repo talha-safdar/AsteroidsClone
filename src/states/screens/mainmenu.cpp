@@ -1,17 +1,10 @@
 #include <filesystem>
 #include <iostream>
 #include "mainmenu.hpp"
-// #include "../../Helper/Group.hpp"
-// #include "../gameState.hpp"
 
-MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window)
-      //window(window),     // Initialize the window reference member
-      //mainBackground(),  
-      //startBtn()
-      //background(mainBackground)
-      //startBtnSprite(startBtn)
+MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window), switchToGameScreen(false) // Initialize to false 
 {
-    //loadAssets();
+
 }
 
 // assets
@@ -33,7 +26,6 @@ void MainMenu::loadAssets()
     circle.setRadius(window.getSize().x / 2 + 100);
     sf::FloatRect bounds = circle.getLocalBounds(); // very useful to get local size (left, top, width, height)
     circle.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
-    //circle.setPosition(window.getSize().x / 2, window.getSize().y / 2);
     circle.setPosition(window.getSize().x / 2, window.getSize().y / 2);
     circle.setTexture(&mainBackground);
 
@@ -79,6 +71,7 @@ void MainMenu::handleInput(sf::Event event) {
             if (startBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
             {
                 std::cout << "Left mouse button was pressed" << std::endl;
+                switchToGameScreen = true;
                 // handle the click
             }
         }
@@ -116,6 +109,17 @@ void MainMenu::render(sf::RenderWindow& window) {
     window.display();
 }
 
-bool MainMenu::shouldSwitchToGameScreen() const {
+bool MainMenu::shouldSwitchToGameScreen() const
+{
     return switchToGameScreen;
+}
+
+void MainMenu::resetSwitchToGameScreenFlag()
+{
+    switchToGameScreen = false;
+}
+
+GameStateType MainMenu::getNextSceneType() const
+{
+    return GameStateType::MainMenu;
 }

@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "states/gameState.hpp"
 #include "states/screens/mainmenu.hpp"
+#include "states/screens/gamescreen.hpp"
 
 int main()
 {
@@ -16,6 +17,7 @@ int main()
 
 				MainMenu mainMenu(window);
 				std::unique_ptr<GameState> currentScene = std::make_unique<MainMenu>(window);
+				std::cout << "Current Scene: " << typeid(*currentScene).name() << std::endl; // Print the type
 				currentScene->loadAssets();
 				// std::unique_ptr<GameState> currentScene = std::make_unique < MainMenu();
 
@@ -29,6 +31,23 @@ int main()
 								sf::Time deltaTime = clock.restart();
 								currentScene->update(deltaTime);
 								currentScene->render(window);
+
+
+								// consider simplyfying it using switchScene(GameStateTypenextScene)
+								if (currentScene->shouldSwitchToGameScreen())
+								{
+												GameStateType nextSceneType = currentScene->getNextSceneType();
+
+												// reset flag before switching
+												currentScene->resetSwitchToGameScreenFlag();
+
+												// switch to next scene based on type
+												if (nextSceneType == GameStateType::GameScreen)
+												{
+																currentScene = std::make_unique<GameScreen>(window);
+												}
+												// else if for other screens
+								}
 				}
 				return 0;
 }

@@ -1,0 +1,39 @@
+#include "gamescreen.hpp"
+
+GameScreen::GameScreen(sf::RenderWindow& window) : GameState(window)
+{
+}
+
+void GameScreen::loadAssets()
+{
+}
+
+void GameScreen::handleInput(sf::Event event)
+{
+}
+
+void GameScreen::update(sf::Time dt)
+{
+}
+
+void GameScreen::render(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Red);
+    window.display();
+}
+
+
+
+bool GameScreen::shouldSwitchToGameScreen() const
+{
+				return false;
+}
+
+void GameScreen::resetSwitchToGameScreenFlag()
+{
+}
+
+GameStateType GameScreen::getNextSceneType() const
+{
+    return GameStateType::GameScreen;
+}
