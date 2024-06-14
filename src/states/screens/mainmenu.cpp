@@ -2,7 +2,7 @@
 #include <iostream>
 #include "mainmenu.hpp"
 
-MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window), switchToGameScreen(false) // Initialize to false 
+MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window), shouldSwitch(false) // Initialize to false 
 {
 
 }
@@ -71,7 +71,7 @@ void MainMenu::handleInput(sf::Event event) {
             if (startBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
             {
                 std::cout << "Left mouse button was pressed" << std::endl;
-                switchToGameScreen = true;
+                shouldSwitch = true;
                 // handle the click
             }
         }
@@ -109,17 +109,17 @@ void MainMenu::render(sf::RenderWindow& window) {
     window.display();
 }
 
-bool MainMenu::shouldSwitchToGameScreen() const
+bool MainMenu::shouldSwitchScene() const
 {
-    return switchToGameScreen;
+    return shouldSwitch;
 }
 
 void MainMenu::resetSwitchToGameScreenFlag()
 {
-    switchToGameScreen = false;
+    shouldSwitch = false;
 }
 
 GameStateType MainMenu::getNextSceneType() const
 {
-    return GameStateType::MainMenu;
+    return GameStateType::GameScreen;
 }

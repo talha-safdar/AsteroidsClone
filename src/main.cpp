@@ -34,7 +34,7 @@ int main()
 
 
 								// consider simplyfying it using switchScene(GameStateTypenextScene)
-								if (currentScene->shouldSwitchToGameScreen())
+								if (currentScene->shouldSwitchScene())
 								{
 												GameStateType nextSceneType = currentScene->getNextSceneType();
 
@@ -42,11 +42,12 @@ int main()
 												currentScene->resetSwitchToGameScreenFlag();
 
 												// switch to next scene based on type
-												if (nextSceneType == GameStateType::GameScreen)
+												switch (nextSceneType)
 												{
+												case GameStateType::GameScreen:
 																currentScene = std::make_unique<GameScreen>(window);
+																break;
 												}
-												// else if for other screens
 								}
 				}
 				return 0;

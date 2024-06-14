@@ -13,7 +13,7 @@ public:
     void update(sf::Time dt) override;
     void render(sf::RenderWindow& window) override;
     void loadAssets();
-    bool shouldSwitchToGameScreen() const;
+    bool shouldSwitchScene() const;
     void resetSwitchToGameScreenFlag() override;
     GameStateType getNextSceneType() const override;
 
@@ -24,5 +24,5 @@ private:
     //sf::RectangleShape rect;
     //sf::Texture startBtn;
     //sf::Sprite startBtnSprite;
-    bool switchToGameScreen = false;
+    bool shouldSwitch = false;
 };

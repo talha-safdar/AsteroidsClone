@@ -24,13 +24,14 @@ void GameScreen::render(sf::RenderWindow& window)
 
 
 
-bool GameScreen::shouldSwitchToGameScreen() const
+bool GameScreen::shouldSwitchScene() const
 {
-				return false;
+				return shouldSwitch;
 }
 
 void GameScreen::resetSwitchToGameScreenFlag()
 {
+    shouldSwitch = false;
 }
 
 GameStateType GameScreen::getNextSceneType() const
