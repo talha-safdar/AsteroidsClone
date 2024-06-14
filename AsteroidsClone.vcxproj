@@ -179,15 +179,15 @@
   <ItemGroup>
     <ClCompile Include="src\Helper\Group.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\states\gameState.cpp" />
-    <ClCompile Include="src\states\screens\gamescreen.cpp" />
-    <ClCompile Include="src\states\screens\mainmenu.cpp" />
+    <ClCompile Include="src\states\game_state.cpp" />
+    <ClCompile Include="src\states\screens\game_screen.cpp" />
+    <ClCompile Include="src\states\screens\main_menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Helper\Group.hpp" />
-    <ClInclude Include="src\states\gameState.hpp" />
-    <ClInclude Include="src\states\screens\gamescreen.hpp" />
-    <ClInclude Include="src\states\screens\mainmenu.hpp" />
+    <ClInclude Include="src\states\game_state.hpp" />
+    <ClInclude Include="src\states\screens\game_screen.hpp" />
+    <ClInclude Include="src\states\screens\main_menu.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

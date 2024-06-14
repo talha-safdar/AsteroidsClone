@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../gameState.hpp"
+#include "../game_state.hpp"
 
 class MainMenu : public GameState {
 public:

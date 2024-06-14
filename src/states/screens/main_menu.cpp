@@ -1,6 +1,6 @@
 #include <filesystem>
 #include <iostream>
-#include "mainmenu.hpp"
+#include "main_menu.hpp"
 
 MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window), shouldSwitch(false) // Initialize to false 
 {

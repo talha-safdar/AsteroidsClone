@@ -4,9 +4,9 @@
 */
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "states/gameState.hpp"
-#include "states/screens/mainmenu.hpp"
-#include "states/screens/gamescreen.hpp"
+#include "states/game_state.hpp"
+#include "states/screens/main_menu.hpp"
+#include "states/screens/game_screen.hpp"
 
 int main()
 {
