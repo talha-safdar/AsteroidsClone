@@ -23,7 +23,6 @@ void MainMenu::loadAssets()
     // Circle for background
     circle.setRadius(window.getSize().x / 2 + 100);
     circle.setPointCount(30);
-    circle.setRadius(window.getSize().x / 2 + 100);
     sf::FloatRect bounds = circle.getLocalBounds(); // very useful to get local size (left, top, width, height)
     circle.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
     circle.setPosition(window.getSize().x / 2, window.getSize().y / 2);
@@ -50,8 +49,11 @@ void MainMenu::loadAssets()
     startBtnSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2 + 100); // Set final position
 }
 
-void MainMenu::handleInput(sf::Event event) {
-    // input handling
+// input handling
+void MainMenu::handleInput(sf::Event event) 
+{
+    // this could will be repeated multiple times
+    // think about to reduce the repeatability
     if (event.type == sf::Event::Closed)
     {
         window.close();
@@ -78,8 +80,9 @@ void MainMenu::handleInput(sf::Event event) {
     }
 }
 
-void MainMenu::update(sf::Time dt) {
-    // logics
+// logics
+void MainMenu::update(sf::Time dt) 
+{
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         std::cout << "Up is currently held down" << std::endl; // the up arrow button
@@ -99,8 +102,9 @@ void MainMenu::update(sf::Time dt) {
     }
 }
 
+// rendering
 void MainMenu::render(sf::RenderWindow& window) {
-    // rendering    // rendering
+
     window.clear(sf::Color::Black);
 
     window.draw(circle);

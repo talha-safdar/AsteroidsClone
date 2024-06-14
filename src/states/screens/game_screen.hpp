@@ -19,7 +19,7 @@ public:
 
 private:
     //sf::Texture mainBackground;
-    //sf::CircleShape circle;
+    sf::CircleShape circle;
     //sf::Sprite background;
     //sf::RectangleShape rect;
     //sf::Texture startBtn;

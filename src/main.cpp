@@ -19,7 +19,6 @@ int main()
 				std::unique_ptr<GameState> currentScene = std::make_unique<MainMenu>(window);
 				std::cout << "Current Scene: " << typeid(*currentScene).name() << std::endl; // Print the type
 				currentScene->loadAssets();
-				// std::unique_ptr<GameState> currentScene = std::make_unique < MainMenu();
 
 				sf::Clock clock;
 
@@ -31,7 +30,6 @@ int main()
 								sf::Time deltaTime = clock.restart();
 								currentScene->update(deltaTime);
 								currentScene->render(window);
-
 
 								// consider simplyfying it using switchScene(GameStateTypenextScene)
 								if (currentScene->shouldSwitchScene())
@@ -48,6 +46,7 @@ int main()
 																currentScene = std::make_unique<GameScreen>(window);
 																break;
 												}
+												currentScene->loadAssets();
 								}
 				}
 				return 0;

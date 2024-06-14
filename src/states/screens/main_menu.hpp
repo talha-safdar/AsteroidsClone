@@ -16,6 +16,7 @@ public:
     bool shouldSwitchScene() const override;
     void resetSwitchToGameScreenFlag() override;
     GameStateType getNextSceneType() const override;
+    ~MainMenu() {};
 
 private:
     sf::Texture mainBackground;
