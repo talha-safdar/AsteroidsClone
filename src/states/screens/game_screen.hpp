@@ -25,4 +25,5 @@ private:
     //sf::Texture startBtn;
     //sf::Sprite startBtnSprite;
     bool shouldSwitch = false;
+				bool isHolding = false;
 };

@@ -32,29 +32,36 @@ void GameScreen::handleInput(sf::Event event)
     {
         if (event.mouseButton.button == sf::Mouse::Left)
         {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            if (circle.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
-            {
-                std::cout << "Do nothing if clicked on circle" << std::endl;
-                // shouldSwitch = true;
-                // handle the click
-            }
-            else
-            {
-                circle.setPosition(mousePosition.x, mousePosition.y);
-            }
+												isHolding = true;
         }
+								else
+								{
+												isHolding = false;
+								}
     }
+				else if (event.type == sf::Event::MouseButtonReleased) {
+								if (event.mouseButton.button == sf::Mouse::Left)
+								{
+												isHolding = false;
+								}
+				}
 }
 
 // logics
 void GameScreen::update(sf::Time dt)
 {
+				if (isHolding == true) {
+								sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+								circle.setPosition(mousePosition.x, mousePosition.y);
+				}
 }
 
 void GameScreen::render(sf::RenderWindow& window)
 {
-    window.clear(sf::Color::Blue);
+				if (isHolding != true) {
+								window.clear(sf::Color::Black);
+				}
+
     window.draw(circle);
     window.display();
 }
