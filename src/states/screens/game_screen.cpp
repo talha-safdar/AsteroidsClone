@@ -58,9 +58,9 @@ void GameScreen::update(sf::Time dt)
 
 void GameScreen::render(sf::RenderWindow& window)
 {
-				if (isHolding != true) {
+				//if (isHolding != true) {
 								window.clear(sf::Color::Black);
-				}
+				//}
 
     window.draw(circle);
     window.display();

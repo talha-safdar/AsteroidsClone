@@ -11,6 +11,10 @@ MainMenu::MainMenu(sf::RenderWindow& window) : GameState(window), shouldSwitch(f
 void MainMenu::loadAssets() 
 {
     // Textures
+				MainMenu::tempClose.setSize(sf::Vector2f(100, 100));
+				MainMenu::tempClose.setFillColor(sf::Color(0, 255, 0));
+				MainMenu::tempClose.setPosition(700, 100);
+
     std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/space.jpg");
     std::cout << absolutePath << std::endl;
     if (mainBackground.loadFromFile(absolutePath.string()) == false) 
@@ -76,6 +80,10 @@ void MainMenu::handleInput(sf::Event event)
                 shouldSwitch = true;
                 // handle the click
             }
+												else if (MainMenu::tempClose.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+												{
+																window.close();
+												}
         }
     }
 }
@@ -108,7 +116,9 @@ void MainMenu::render(sf::RenderWindow& window) {
     window.clear(sf::Color::Black);
 
     window.draw(circle);
+
     window.draw(startBtnSprite);
+				window.draw(MainMenu::tempClose);
     // drawing
     window.display();
 }

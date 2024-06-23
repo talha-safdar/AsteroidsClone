@@ -23,5 +23,8 @@ public:
 				virtual ~GameState() {}  // Virtual destructor in GameState.hpp
 protected:
 				sf::RenderWindow& window;
+				sf::Texture CloseBtnTexture;
+				sf::Sprite CloseBtnSprite;
+				sf::RectangleShape tempClose;
 };
 
