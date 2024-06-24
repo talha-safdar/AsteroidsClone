@@ -1,4 +1,7 @@
+#include <filesystem>
+#include <iostream>
 #include "game_screen.hpp"
+#define SPEED_CHARACTER 10
 
 GameScreen::GameScreen(sf::RenderWindow& window) : GameState(window)
 {
@@ -12,6 +15,25 @@ void GameScreen::loadAssets()
     circle.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
     circle.setPosition(window.getSize().x / 2, window.getSize().y / 2);
     circle.setFillColor(sf::Color::Red);
+
+				std::filesystem::path absolutePath1 = std::filesystem::absolute("assets/media/images/astronaut.png");
+				std::cout << absolutePath1 << std::endl;
+				if (astronautTxr.loadFromFile(absolutePath1.string()) == false)
+				{
+								std::cout << "Loading failed" << std::endl;
+								// also add visual error
+				}
+				else
+				{
+								std::cout << "Button texture size: " << astronautTxr.getSize().x << " x " << astronautTxr.getSize().y << std::endl;
+				}
+				astronautTxr.setSmooth(true); // smoothness
+				astronautSprt.setTexture(astronautTxr);
+				astronautSprt.setScale(sf::Vector2f(0.15, 0.15));
+				sf::FloatRect bounds2 = astronautSprt.getLocalBounds();
+				astronautSprt.setOrigin(bounds2.left + bounds2.width / 2.f, bounds2.top + bounds2.height / 2.f);
+				// astronautSprt.setOrigin(500, 500); // for mouse
+				astronautSprt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 }
 
 // input handling
@@ -23,10 +45,26 @@ void GameScreen::handleInput(sf::Event event)
     }
     else if (event.type == sf::Event::KeyPressed) // keyboard
     {
-        if (event.key.code == sf::Keyboard::Escape || event.type == sf::Keyboard::Up)
+        if (event.key.code == sf::Keyboard::Escape)
         {
             window.close();
         }
+								if (event.key.code == sf::Keyboard::Up)
+								{
+												moveUp = true;
+								}
+								if (event.key.code == sf::Keyboard::Right)
+								{
+												moveRight = true;
+								}								
+								if (event.key.code == sf::Keyboard::Down)
+								{
+												moveDown = true;
+								}								
+								if (event.key.code == sf::Keyboard::Left)
+								{
+												moveLeft = true;
+								}
     }
     else if (event.type == sf::Event::MouseButtonPressed) // mouse
     {
@@ -50,9 +88,29 @@ void GameScreen::handleInput(sf::Event event)
 // logics
 void GameScreen::update(sf::Time dt)
 {
-				if (isHolding == true) {
-								sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-								circle.setPosition(mousePosition.x, mousePosition.y);
+				//if (isHolding == true) {
+				//				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+				//				astronautSprt.setPosition(mousePosition.x, mousePosition.y);
+				//}
+				if (moveUp)
+				{
+								astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y - SPEED_CHARACTER);
+								moveUp = false;
+				}
+				if (moveRight)
+				{
+								astronautSprt.setPosition(astronautSprt.getPosition().x + SPEED_CHARACTER, astronautSprt.getPosition().y);
+								moveRight = false;
+				}
+				if (moveDown)
+				{
+								astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y + SPEED_CHARACTER);
+								moveDown = false;
+				}
+				if (moveLeft)
+				{
+								astronautSprt.setPosition(astronautSprt.getPosition().x - SPEED_CHARACTER, astronautSprt.getPosition().y);
+								moveLeft = false;
 				}
 }
 
@@ -62,7 +120,7 @@ void GameScreen::render(sf::RenderWindow& window)
 								window.clear(sf::Color::Black);
 				//}
 
-    window.draw(circle);
+    window.draw(astronautSprt);
     window.display();
 }
 

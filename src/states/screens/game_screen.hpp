@@ -26,4 +26,10 @@ private:
     //sf::Sprite startBtnSprite;
     bool shouldSwitch = false;
 				bool isHolding = false;
+				sf::Texture astronautTxr;
+				sf::Sprite astronautSprt;
+				bool moveUp = false;
+				bool moveRight = false;
+				bool moveDown = false;
+				bool moveLeft = false;
 };

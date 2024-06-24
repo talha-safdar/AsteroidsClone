@@ -3,4 +3,5 @@ Images:
 AsteroidsClone\data\media\images
 {
 	space.jpg: Photo by Kaveh Keshtiara: https://www.pexels.com/photo/stars-in-the-night-sky-13179963/
+	astronaut.png: https://www.flaticon.com/free-icons/astronaut Astronaut icons created by Adib Sulthon - Flaticon
 }
