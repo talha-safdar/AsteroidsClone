@@ -9,6 +9,8 @@ GameScreen::GameScreen(sf::RenderWindow& window) : GameState(window)
 
 void GameScreen::loadAssets()
 {
+	GameState::addCloseButton(); // abstracted 
+
 	circle.setRadius(5);
 	circle.setPointCount(30);
 	sf::FloatRect bounds = circle.getLocalBounds(); // very useful to get local size (left, top, width, height)
@@ -52,7 +54,12 @@ void GameScreen::handleInput(sf::Event event)
 	}
 	else if (event.type == sf::Event::MouseButtonPressed) // mouse
 	{
-		if (event.mouseButton.button == sf::Mouse::Left)
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+		if (GameScreen::CloseBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+		{
+			window.close();
+		}
+		else if (event.mouseButton.button == sf::Mouse::Left)
 		{
 			isHolding = true;
 		}
@@ -126,7 +133,9 @@ void GameScreen::render(sf::RenderWindow& window)
 {
 	window.clear(sf::Color::Black);
 
+
 	window.draw(astronautSprt);
+	window.draw(GameScreen::CloseBtnSprite);
 	window.display();
 }
 

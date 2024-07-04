@@ -16,25 +16,13 @@ void MainMenu::loadAssets()
 
 
 	// close button ###
-	// texture
-	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/cancel.png");
-	if (MainMenu::CloseBtnTexture.loadFromFile(absolutePath.string()) == false)
-	{
-		std::cout << "Loading failed" << std::endl;
-		// also add visual error
-	}
-	MainMenu::CloseBtnTexture.setSmooth(true);
-
-	// sprite
-	MainMenu::CloseBtnSprite.setTexture(MainMenu::CloseBtnTexture);
-	MainMenu::CloseBtnSprite.setPosition(920, 15);
-	MainMenu::CloseBtnSprite.setScale(0.05, 0.05);
+	GameState::addCloseButton(); // abstracted 
 	// ################
 
 
 
 
-	absolutePath = std::filesystem::absolute("assets/media/images/space.jpg");
+	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/space.jpg");
 	// std::cout << absolutePath << std::endl;
 	if (mainBackground.loadFromFile(absolutePath.string()) == false)
 	{

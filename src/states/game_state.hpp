@@ -22,6 +22,7 @@ public:
 	virtual bool shouldSwitchScene() const = 0;
 	virtual void resetSwitchToGameScreenFlag() = 0;
 	virtual GameStateType getNextSceneType() const = 0;
+	void addCloseButton();
 	virtual ~GameState() {}  // Virtual destructor in GameState.hpp
 protected:
 	sf::RenderWindow& window;
