@@ -2,7 +2,7 @@
 
 void Group::addChild(sf::Drawable& child)
 {
-				children.push_back(&child);
+	children.push_back(&child);
 }
 
 // can add more funcions
@@ -14,9 +14,8 @@ void Group::addChild(sf::Drawable& child)
 */
 
 void Group::draw(sf::RenderTarget& target, sf::RenderStates states) {
-				states.transform *= getTransform();
-				for (const auto& child : children) {
-								target.draw(*child, states);
-				}
+	states.transform *= getTransform();
+	for (const auto& child : children) {
+		target.draw(*child, states);
+	}
 }
-
