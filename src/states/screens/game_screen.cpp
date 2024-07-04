@@ -90,38 +90,79 @@ void GameScreen::handleInput(sf::Event event)
 // logics
 void GameScreen::update(sf::Time dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		moveUp();
-		moveRight();
-	}
-	if (isHolding == true) 
-	{
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-		astronautSprt.setPosition(mousePosition.x, mousePosition.y);
-	}
-	if (moveUpTrigger)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
 	{
 		moveUp();
-		if (moveUpTrigger && moveRightTrigger)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			moveUpAndRight();
+			moveRight();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			moveLeft();
 		}
 	}
-	if (moveRightTrigger)
+	//if (isHolding == true) 
+	//{
+	//	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	//	astronautSprt.setPosition(mousePosition.x, mousePosition.y);
+	//}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		astronautSprt.setPosition(astronautSprt.getPosition().x + SPEED_CHARACTER, astronautSprt.getPosition().y);
-		moveRightTrigger = false;
+		moveRight();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			moveUp();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			moveDown();
+		}
 	}
-	if (moveDownTrigger)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y + SPEED_CHARACTER);
-		moveDownTrigger = false;
+		moveDown();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			moveRight();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			moveLeft();
+		}
 	}
-	if (moveLeftTrigger)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		astronautSprt.setPosition(astronautSprt.getPosition().x - SPEED_CHARACTER, astronautSprt.getPosition().y);
-		moveLeftTrigger = false;
+		moveLeft();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			moveDown();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			moveUp();
+		}
 	}
+
+
+
+
+
+	//if (moveRightTrigger)
+	//{
+	//	astronautSprt.setPosition(astronautSprt.getPosition().x + SPEED_CHARACTER, astronautSprt.getPosition().y);
+	//	moveRightTrigger = false;
+	//}
+	//if (moveDownTrigger)
+	//{
+	//	astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y + SPEED_CHARACTER);
+	//	moveDownTrigger = false;
+	//}
+	//if (moveLeftTrigger)
+	//{
+	//	astronautSprt.setPosition(astronautSprt.getPosition().x - SPEED_CHARACTER, astronautSprt.getPosition().y);
+	//	moveLeftTrigger = false;
+	//}
 }
 
 void GameScreen::render(sf::RenderWindow& window)
