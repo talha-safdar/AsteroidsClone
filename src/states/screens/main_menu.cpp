@@ -14,8 +14,28 @@ void MainMenu::loadAssets()
 	MainMenu::tempClose.setFillColor(sf::Color(0, 255, 0));
 	MainMenu::tempClose.setPosition(700, 100);
 
-	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/space.jpg");
-	std::cout << absolutePath << std::endl;
+
+	// close button ###
+	// texture
+	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/cancel.png");
+	if (MainMenu::CloseBtnTexture.loadFromFile(absolutePath.string()) == false)
+	{
+		std::cout << "Loading failed" << std::endl;
+		// also add visual error
+	}
+	MainMenu::CloseBtnTexture.setSmooth(true);
+
+	// sprite
+	MainMenu::CloseBtnSprite.setTexture(MainMenu::CloseBtnTexture);
+	MainMenu::CloseBtnSprite.setPosition(920, 15);
+	MainMenu::CloseBtnSprite.setScale(0.05, 0.05);
+	// ################
+
+
+
+
+	absolutePath = std::filesystem::absolute("assets/media/images/space.jpg");
+	// std::cout << absolutePath << std::endl;
 	if (mainBackground.loadFromFile(absolutePath.string()) == false)
 	{
 		std::cout << "Loading failed" << std::endl;
@@ -32,9 +52,9 @@ void MainMenu::loadAssets()
 	circle.setTexture(&mainBackground);
 
 	// create button
-	std::filesystem::path absolutePath1 = std::filesystem::absolute("assets/media/images/startBtn.png");
-	std::cout << absolutePath1 << std::endl;
-	if (startBtn.loadFromFile(absolutePath1.string()) == false)
+	absolutePath = std::filesystem::absolute("assets/media/images/startBtn.png");
+	std::cout << absolutePath << std::endl;
+	if (startBtn.loadFromFile(absolutePath.string()) == false)
 	{
 		std::cout << "Loading failed" << std::endl;
 		// also add visual error
@@ -75,11 +95,11 @@ void MainMenu::handleInput(sf::Event event)
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 			if (startBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
 			{
-				std::cout << "Left mouse button was pressed" << std::endl;
+				// std::cout << "Left mouse button was pressed" << std::endl;
 				shouldSwitch = true;
 				// handle the click
 			}
-			else if (MainMenu::tempClose.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+			else if (MainMenu::CloseBtnSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
 			{
 				window.close();
 			}
@@ -115,7 +135,7 @@ void MainMenu::render(sf::RenderWindow& window) {
 	window.draw(circle);
 
 	window.draw(startBtnSprite);
-	window.draw(MainMenu::tempClose);
+	window.draw(MainMenu::CloseBtnSprite);
 	// drawing
 	window.display();
 }

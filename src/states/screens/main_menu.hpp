@@ -4,7 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "../game_state.hpp"
 
-class MainMenu : public GameState {
+class MainMenu : public GameState 
+{
 public:
 	MainMenu(sf::RenderWindow& window);
 
