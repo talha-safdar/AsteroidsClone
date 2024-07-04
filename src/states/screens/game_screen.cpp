@@ -9,7 +9,25 @@ GameScreen::GameScreen(sf::RenderWindow& window) : GameState(window)
 
 void GameScreen::loadAssets()
 {
-	GameState::addCloseButton(); // abstracted 
+	// close button
+	GameState::addCloseButton(); // abstracted from GameState
+
+	// aiming ###
+	// texture
+	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/aim.png");
+	if (aimtexture.loadFromFile(absolutePath.string()) == false)
+	{
+		std::cout << "Loading failed" << std::endl;
+	// also add visual error
+	}
+	aimtexture.setSmooth(true);
+
+	// sprite
+	aimSprite.setTexture(aimtexture);
+	aimSprite.setPosition(420, 115);
+	aimSprite.setScale(0.1, 0.1);
+	aimSprite.setOrigin(aimSprite.getLocalBounds().width / 2, aimSprite.getLocalBounds().height / 2);
+	// ##########
 
 	circle.setRadius(5);
 	circle.setPointCount(30);
@@ -61,10 +79,12 @@ void GameScreen::handleInput(sf::Event event)
 		}
 		else if (event.mouseButton.button == sf::Mouse::Left)
 		{
+			window.setMouseCursorVisible(false);
 			isHolding = true;
 		}
 		else
 		{
+			window.setMouseCursorVisible(true);
 			isHolding = false;
 		}
 	}
@@ -127,14 +147,22 @@ void GameScreen::update(sf::Time dt)
 			moveUp();
 		}
 	}
+
+	if (isHolding)
+	{
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+		aimSprite.setPosition(mousePosition.x, mousePosition.y);
+	}
 }
 
+// render
 void GameScreen::render(sf::RenderWindow& window)
 {
 	window.clear(sf::Color::Black);
 
 
 	window.draw(astronautSprt);
+	window.draw(aimSprite);
 	window.draw(GameScreen::CloseBtnSprite);
 	window.display();
 }
@@ -158,14 +186,6 @@ void GameScreen::moveUp()
 {
 	astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y - SPEED_CHARACTER);
 	moveUpTrigger = false;
-}
-
-void GameScreen::moveUpAndRight()
-{
-	astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y - SPEED_CHARACTER); // up
-	astronautSprt.setPosition(astronautSprt.getPosition().x + SPEED_CHARACTER, astronautSprt.getPosition().y); // right
-	moveUpTrigger = false;
-	moveRightTrigger = false;
 }
 
 

@@ -34,11 +34,11 @@ private:
 	bool moveRightTrigger = false;
 	bool moveDownTrigger = false;
 	bool moveLeftTrigger = false;
+	sf::Texture aimtexture;
+	sf::Sprite aimSprite;
 
 	// temporary functions to be moved
 	void moveUp();
-	void moveUpAndRight();
-
 	void moveRight();
 	void moveDown();
 	void moveLeft();
