@@ -49,24 +49,6 @@ void GameScreen::handleInput(sf::Event event)
 		{
 			window.close();
 		}
-		if (event.key.code == sf::Keyboard::Up)
-		{
-			std::cout << "UP" << std::endl;
-			moveUpTrigger = true;
-		}
-		if (event.key.code == sf::Keyboard::Right)
-		{
-			std::cout << "U" << std::endl;
-			moveRightTrigger = true;
-		}
-		if (event.key.code == sf::Keyboard::Down)
-		{
-			moveDownTrigger = true;
-		}
-		if (event.key.code == sf::Keyboard::Left)
-		{
-			moveLeftTrigger = true;
-		}
 	}
 	else if (event.type == sf::Event::MouseButtonPressed) // mouse
 	{
@@ -90,86 +72,59 @@ void GameScreen::handleInput(sf::Event event)
 // logics
 void GameScreen::update(sf::Time dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
 	{
 		moveUp();
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			moveRight();
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			moveLeft();
 		}
 	}
-	//if (isHolding == true) 
-	//{
-	//	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-	//	astronautSprt.setPosition(mousePosition.x, mousePosition.y);
-	//}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		moveRight();
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			moveUp();
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			moveDown();
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		moveDown();
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			moveRight();
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			moveLeft();
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		moveLeft();
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			moveDown();
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			moveUp();
 		}
 	}
-
-
-
-
-
-	//if (moveRightTrigger)
-	//{
-	//	astronautSprt.setPosition(astronautSprt.getPosition().x + SPEED_CHARACTER, astronautSprt.getPosition().y);
-	//	moveRightTrigger = false;
-	//}
-	//if (moveDownTrigger)
-	//{
-	//	astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y + SPEED_CHARACTER);
-	//	moveDownTrigger = false;
-	//}
-	//if (moveLeftTrigger)
-	//{
-	//	astronautSprt.setPosition(astronautSprt.getPosition().x - SPEED_CHARACTER, astronautSprt.getPosition().y);
-	//	moveLeftTrigger = false;
-	//}
 }
 
 void GameScreen::render(sf::RenderWindow& window)
 {
-	//if (isHolding != true) {
 	window.clear(sf::Color::Black);
-	//}
 
 	window.draw(astronautSprt);
 	window.display();
