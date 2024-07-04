@@ -13,6 +13,8 @@ enum class GameStateType
 class GameState {
 public:
 	GameState(sf::RenderWindow& window) : window(window) {} // Add this constructor
+
+
 	virtual void handleInput(sf::Event event) = 0;
 	virtual void update(sf::Time dt) = 0;
 	virtual void render(sf::RenderWindow& window) = 0;

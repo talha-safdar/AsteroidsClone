@@ -51,10 +51,12 @@ void GameScreen::handleInput(sf::Event event)
 		}
 		if (event.key.code == sf::Keyboard::Up)
 		{
+			std::cout << "UP" << std::endl;
 			moveUpTrigger = true;
 		}
 		if (event.key.code == sf::Keyboard::Right)
 		{
+			std::cout << "U" << std::endl;
 			moveRightTrigger = true;
 		}
 		if (event.key.code == sf::Keyboard::Down)
@@ -88,6 +90,10 @@ void GameScreen::handleInput(sf::Event event)
 // logics
 void GameScreen::update(sf::Time dt)
 {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		moveUp();
+		moveRight();
+	}
 	if (isHolding == true) 
 	{
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
@@ -98,8 +104,7 @@ void GameScreen::update(sf::Time dt)
 		moveUp();
 		if (moveUpTrigger && moveRightTrigger)
 		{
-			moveUp();
-			moveRight();
+			moveUpAndRight();
 		}
 	}
 	if (moveRightTrigger)
@@ -144,11 +149,20 @@ GameStateType GameScreen::getNextSceneType() const
 	return GameStateType::GameScreen;
 }
 
-void GameScreen::moveUp() 
+void GameScreen::moveUp()
 {
 	astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y - SPEED_CHARACTER);
 	moveUpTrigger = false;
 }
+
+void GameScreen::moveUpAndRight()
+{
+	astronautSprt.setPosition(astronautSprt.getPosition().x, astronautSprt.getPosition().y - SPEED_CHARACTER); // up
+	astronautSprt.setPosition(astronautSprt.getPosition().x + SPEED_CHARACTER, astronautSprt.getPosition().y); // right
+	moveUpTrigger = false;
+	moveRightTrigger = false;
+}
+
 
 void GameScreen::moveRight() 
 {

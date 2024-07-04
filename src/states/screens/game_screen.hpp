@@ -2,10 +2,12 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include "../game_state.hpp"
 
 class GameScreen : public GameState {
 public:
+
 	GameScreen(sf::RenderWindow& window);
 
 	// GameState interface implementation
@@ -35,6 +37,8 @@ private:
 
 	// temporary functions to be moved
 	void moveUp();
+	void moveUpAndRight();
+
 	void moveRight();
 	void moveDown();
 	void moveLeft();
