@@ -99,6 +99,7 @@ void GameScreen::handleInput(sf::Event event)
 // logics
 void GameScreen::update(sf::Time dt)
 {
+	// keyboard
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
 	{
 		moveUp();
@@ -148,10 +149,35 @@ void GameScreen::update(sf::Time dt)
 		}
 	}
 
+	// mouse
 	if (isHolding)
 	{
+		// aim
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 		aimSprite.setPosition(mousePosition.x, mousePosition.y);
+	}
+
+	std::cout << "astro X: " << astronautSprt.getPosition().x << std::endl;
+	std::cout << "window X: " << window.getSize().x << std::endl;
+
+	// border check
+	// right/down
+	if (astronautSprt.getPosition().x > window.getSize().x)
+	{
+		astronautSprt.setPosition(0, astronautSprt.getPosition().y); // 0 means the edge 
+	}
+	if (astronautSprt.getPosition().y > window.getSize().y)
+	{
+		astronautSprt.setPosition(astronautSprt.getPosition().x, 0);
+	}
+	// left/up
+	if (astronautSprt.getPosition().x < 0)
+	{
+		astronautSprt.setPosition(window.getSize().x, astronautSprt.getPosition().y);
+	}
+	if (astronautSprt.getPosition().y < 0)
+	{
+		astronautSprt.setPosition(astronautSprt.getPosition().x, window.getSize().y);
 	}
 }
 
@@ -166,6 +192,16 @@ void GameScreen::render(sf::RenderWindow& window)
 	window.draw(GameScreen::CloseBtnSprite);
 	window.display();
 }
+
+
+
+
+
+
+
+
+
+
 
 bool GameScreen::shouldSwitchScene() const
 {
