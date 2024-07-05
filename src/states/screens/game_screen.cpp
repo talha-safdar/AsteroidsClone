@@ -12,6 +12,10 @@ void GameScreen::loadAssets()
 	// close button
 	GameState::addCloseButton(); // abstracted from GameState
 
+	// aiming line ###
+
+	// ###############
+
 	// aiming ###
 	// texture
 	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/aim.png");
@@ -82,15 +86,11 @@ void GameScreen::handleInput(sf::Event event)
 			window.setMouseCursorVisible(false);
 			isHolding = true;
 		}
-		else
-		{
-			window.setMouseCursorVisible(true);
-			isHolding = false;
-		}
 	}
 	else if (event.type == sf::Event::MouseButtonReleased) {
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
+			window.setMouseCursorVisible(true);
 			isHolding = false;
 		}
 	}
@@ -154,11 +154,33 @@ void GameScreen::update(sf::Time dt)
 	{
 		// aim
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-		aimSprite.setPosition(mousePosition.x, mousePosition.y);
-	}
 
-	std::cout << "astro X: " << astronautSprt.getPosition().x << std::endl;
-	std::cout << "window X: " << window.getSize().x << std::endl;
+		//std::cout << "aim X: " << aimSprite.getPosition().x << std::endl;
+		//std::cout << "astr X: " << astronautSprt.getPosition().x << std::endl;
+		//std::cout << "MOUSE X: " << mousePosition.x << std::endl;
+		// limit aim reach
+		/*
+		* if the aiming is less than the position of astronaut multiplied by 1.5
+		* then continue to reposition else stop
+		* multiplication *: towards right/down
+		* division /: towards left/up
+		*/
+		if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
+		{
+			aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		}
+		else 
+		{
+			reachedX = true;
+			// keep sliding perpendiclualry
+			aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
+		}
+
+		//if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
+		//{
+		//	aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//}
+	}
 
 	// border check
 	// right/down
