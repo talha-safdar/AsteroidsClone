@@ -153,6 +153,7 @@ void GameScreen::update(sf::Time dt)
 	if (isHolding)
 	{
 		// aim
+		// TO BE FIXED USING DELTA TIME
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
 		//std::cout << "aim X: " << aimSprite.getPosition().x << std::endl;
@@ -165,21 +166,78 @@ void GameScreen::update(sf::Time dt)
 		* multiplication *: towards right/down
 		* division /: towards left/up
 		*/
-		if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
+		// X axis ##########
+		if (!reachedXLeft)
 		{
-			aimSprite.setPosition(mousePosition.x, mousePosition.y);
+			if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
+			{
+				std::cout << "R IF " << mousePosition.x << std::endl;
+				reachedXRight = false;
+				aimSprite.setPosition(mousePosition.x, mousePosition.y);
+			}
+			else
+			{
+				// std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
+				reachedXRight = true;
+				// keep sliding perpendiclualry
+				aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y); // THIS LINE IS REPEATED !!!
+			}
+			std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
 		}
-		else 
+		if (!reachedXRight)
 		{
-			reachedX = true;
-			// keep sliding perpendiclualry
-			aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
+			// std::cout << "L IF CALC: " << aimSprite.getPosition().x << " " << astronautSprt.getPosition().x / 1.5 << std::endl;
+			if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
+			{
+				std::cout << "L IF " << mousePosition.x << std::endl;
+				reachedXLeft = false;
+				aimSprite.setPosition(mousePosition.x, mousePosition.y);
+			}
+			else
+			{
+				std::cout << "L ELSE " << mousePosition.x << std::endl;
+				reachedXLeft = true;
+				// keep sliding perpendiclualry
+				aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
+			}
 		}
+		// #################
 
-		//if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
+		// Y axis #########
+		//if (!reachedYDown)
 		//{
-		//	aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//	if (aimSprite.getPosition().y < astronautSprt.getPosition().y * 1.5 || mousePosition.y < aimSprite.getPosition().y)
+		//	{
+		//		// std::cout << "R IF " << mousePosition.x << std::endl;
+		//		reachedYUp = false;
+		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//	}
+		//	else
+		//	{
+		//		// std::cout << "R ELSE " << mousePosition.x << std::endl;
+		//		reachedYUp = true;
+		//		// keep sliding perpendiclualry
+		//		aimSprite.setPosition(mousePosition.x, aimSprite.getPosition().y);
+		//	}
 		//}
+		//if (!reachedYUp)
+		//{
+		//	// std::cout << "L IF CALC: " << aimSprite.getPosition().x << " " << astronautSprt.getPosition().x / 1.5 << std::endl;
+		//	if (aimSprite.getPosition().y > astronautSprt.getPosition().y / 1.5 || mousePosition.y > aimSprite.getPosition().y)
+		//	{
+		//		// std::cout << "L IF " << mousePosition.x << std::endl;
+		//		reachedYDown = false;
+		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//	}
+		//	else
+		//	{
+		//		// std::cout << "L ELSE " << mousePosition.x << std::endl;
+		//		reachedYDown = true;
+		//		// keep sliding perpendiclualry
+		//		aimSprite.setPosition(mousePosition.x, aimSprite.getPosition().y);
+		//	}
+		//}
+		// ################
 	}
 
 	// border check

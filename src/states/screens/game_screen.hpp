@@ -44,6 +44,8 @@ private:
 	void moveLeft();
 
 	// aim limit flags
-	bool reachedX = false;
-	bool reachedY = false;
+	bool reachedXLeft = false;
+	bool reachedXRight = false;
+	bool reachedYUp = false;
+	bool reachedYDown = false;
 };
