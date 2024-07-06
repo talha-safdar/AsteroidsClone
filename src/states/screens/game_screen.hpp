@@ -20,32 +20,26 @@ public:
 	GameStateType getNextSceneType() const override;
 
 private:
-	//sf::Texture mainBackground;
 	sf::CircleShape circle;
-	//sf::Sprite background;
-	//sf::RectangleShape rect;
-	//sf::Texture startBtn;
-	//sf::Sprite startBtnSprite;
-	bool shouldSwitch = false;
-	bool isHolding = false;
+
+	sf::Texture aimtexture;
+	sf::Sprite aimSprite;
 	sf::Texture astronautTxr;
 	sf::Sprite astronautSprt;
+	sf::Texture lineTexture;
+	sf::Sprite lineSprite;
+
+	bool shouldSwitch = false;
+	bool isHolding = false;
+
 	bool moveUpTrigger = false;
 	bool moveRightTrigger = false;
 	bool moveDownTrigger = false;
 	bool moveLeftTrigger = false;
-	sf::Texture aimtexture;
-	sf::Sprite aimSprite;
 
 	// temporary functions to be moved
 	void moveUp();
 	void moveRight();
 	void moveDown();
 	void moveLeft();
-
-	// aim limit flags
-	bool reachedXLeft = false;
-	bool reachedXRight = false;
-	bool reachedYUp = false;
-	bool reachedYDown = false;
 };

@@ -12,10 +12,6 @@ void GameScreen::loadAssets()
 	// close button
 	GameState::addCloseButton(); // abstracted from GameState
 
-	// aiming line ###
-
-	// ###############
-
 	// aiming ###
 	// texture
 	std::filesystem::path absolutePath = std::filesystem::absolute("assets/media/images/aim.png");
@@ -34,6 +30,23 @@ void GameScreen::loadAssets()
 	aimSprite.setOrigin(aimSprite.getLocalBounds().width / 2, aimSprite.getLocalBounds().height / 2);
 	// ##########
 
+	// aiming line ### TO BE IMPLEMENTED
+	//absolutePath = std::filesystem::absolute("assets/media/images/line.png");
+	//if (lineTexture.loadFromFile(absolutePath.string()) == false)
+	//{
+	//	std::cout << "Loading failed" << std::endl;
+	//	// also add visual error
+	//}
+	//lineTexture.setSmooth(true);
+
+	//// sprite
+	//lineSprite.setTexture(lineTexture);
+	//// aimSprite.setPosition(420, 115);
+	//lineSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	//lineSprite.setScale(0.1, 0.1);
+	//lineSprite.setOrigin(lineSprite.getLocalBounds().width / 2, lineSprite.getLocalBounds().height / 2);
+	// ###############
+	
 	circle.setRadius(5);
 	circle.setPointCount(30);
 	sf::FloatRect bounds = circle.getLocalBounds(); // very useful to get local size (left, top, width, height)
@@ -156,151 +169,17 @@ void GameScreen::update(sf::Time dt)
 		// aim
 		// TO BE FIXED USING DELTA TIME
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-		//std::cout << "aim X: " << aimSprite.getPosition().x << std::endl;
-		//std::cout << "astr X: " << astronautSprt.getPosition().x << std::endl;
-		//std::cout << "MOUSE X: " << mousePosition.x << std::endl;
-		// limit aim reach
-		/*
-		* if the aiming is less than the position of astronaut multiplied by 1.5
-		* then continue to reposition else stop
-		* multiplication *: towards right/down
-		* division /: towards left/up
-		*/
-		// X axis ##########
-		//if (!reachedXLeft)
-		//{
-		//	if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
-		//	{
-		//		std::cout << "R IF " << mousePosition.x << std::endl;
-		//		reachedXRight = false;
-		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
-		//	}
-		//	else
-		//	{
-		//		// std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
-		//		reachedXRight = true;
-		//		// keep sliding perpendiclualry
-		//		aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y); // THIS LINE IS REPEATED !!!
-		//	}
-		//	std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
-		//}
-		//if (!reachedXRight)
-		//{
-		//	// std::cout << "L IF CALC: " << aimSprite.getPosition().x << " " << astronautSprt.getPosition().x / 1.5 << std::endl;
-		//	if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
-		//	{
-		//		std::cout << "L IF " << mousePosition.x << std::endl;
-		//		reachedXLeft = false;
-		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
-		//	}
-		//	else
-		//	{
-		//		std::cout << "L ELSE " << mousePosition.x << std::endl;
-		//		reachedXLeft = true;
-		//		// keep sliding perpendiclualry
-		//		aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
-		//	}
-		//}
-		// #################
-		
 		sf::Vector2f astroTest = astronautSprt.getPosition();
 		sf::Vector2f aimTest = aimSprite.getPosition();
 		float distance = std::hypot(mousePosition.x - astroTest.x, mousePosition.y - astroTest.y);
 		if (distance >= 200) 
 		{
-			std::cout << "POLLO" << std::endl;
 			aimSprite.setPosition(aimSprite.getPosition().x, aimSprite.getPosition().y);
 		}
 		else
 		{
 			aimSprite.setPosition(mousePosition.x, mousePosition.y);
 		}
-		//std::cout << reachedYUp << " " << reachedXRight << " " << reachedYDown << " " << reachedXLeft << std::endl;
-		//if (!reachedYUp && !reachedXRight && !reachedYDown && !reachedXLeft)
-		//{
-		//	aimSprite.setPosition(mousePosition.x, mousePosition.y);
-		//	if (aimSprite.getPosition().x > astronautSprt.getPosition().x * 1.5 || mousePosition.x > aimSprite.getPosition().x)
-		//	{
-		//		reachedXRight = true;
-		//	}
-		//	if (aimSprite.getPosition().x < astronautSprt.getPosition().x / 1.5 || mousePosition.x < aimSprite.getPosition().x)
-		//	{
-		//		reachedXLeft = true;
-		//	}
-		//	if (aimSprite.getPosition().y > astronautSprt.getPosition().y * 1.5 || mousePosition.y > aimSprite.getPosition().y)
-		//	{
-		//		reachedYDown = true;
-		//	}
-		//	if (aimSprite.getPosition().y < astronautSprt.getPosition().y / 1.5 || mousePosition.y < aimSprite.getPosition().y)
-		//	{
-		//		reachedYUp = true;
-		//	}
-		//}
-		//else
-		//{
-		//	if (reachedXRight || reachedXLeft)
-		//	{
-		//		aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
-		//	}
-		//	if (reachedYUp || reachedYDown)
-		//	{
-		//		aimSprite.setPosition(mousePosition.x, aimSprite.getPosition().y);
-		//	}
-		//	
-		//	if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
-		//	{
-		//		reachedXRight = false;
-		//	}
-		//	if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
-		//	{
-		//		reachedXLeft = false;
-		//	}
-		//	if (aimSprite.getPosition().y < astronautSprt.getPosition().y * 1.5 || mousePosition.y < aimSprite.getPosition().y)
-		//	{
-		//		reachedYDown = false;
-		//	}
-		//	if (aimSprite.getPosition().y > astronautSprt.getPosition().y / 1.5 || mousePosition.y > aimSprite.getPosition().y)
-		//	{
-		//		reachedYUp = false;
-		//	}
-		//}
-
-		// Y axis #########
-		//if (!reachedYDown)
-		//{
-		//	if (aimSprite.getPosition().y < astronautSprt.getPosition().y * 1.5 || mousePosition.y < aimSprite.getPosition().y)
-		//	{
-		//		// std::cout << "R IF " << mousePosition.x << std::endl;
-		//		reachedYUp = false;
-		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
-		//	}
-		//	else
-		//	{
-		//		// std::cout << "R ELSE " << mousePosition.x << std::endl;
-		//		reachedYUp = true;
-		//		// keep sliding perpendiclualry
-		//		aimSprite.setPosition(mousePosition.x, aimSprite.getPosition().y);
-		//	}
-		//}
-		//if (!reachedYUp)
-		//{
-		//	// std::cout << "L IF CALC: " << aimSprite.getPosition().x << " " << astronautSprt.getPosition().x / 1.5 << std::endl;
-		//	if (aimSprite.getPosition().y > astronautSprt.getPosition().y / 1.5 || mousePosition.y > aimSprite.getPosition().y)
-		//	{
-		//		// std::cout << "L IF " << mousePosition.x << std::endl;
-		//		reachedYDown = false;
-		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
-		//	}
-		//	else
-		//	{
-		//		// std::cout << "L ELSE " << mousePosition.x << std::endl;
-		//		reachedYDown = true;
-		//		// keep sliding perpendiclualry
-		//		aimSprite.setPosition(mousePosition.x, aimSprite.getPosition().y);
-		//	}
-		//}
-		// ################
 	}
 
 	// border check
