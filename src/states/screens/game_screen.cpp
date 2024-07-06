@@ -28,7 +28,8 @@ void GameScreen::loadAssets()
 
 	// sprite
 	aimSprite.setTexture(aimtexture);
-	aimSprite.setPosition(420, 115);
+	// aimSprite.setPosition(420, 115);
+	aimSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 	aimSprite.setScale(0.1, 0.1);
 	aimSprite.setOrigin(aimSprite.getLocalBounds().width / 2, aimSprite.getLocalBounds().height / 2);
 	// ##########
@@ -167,41 +168,103 @@ void GameScreen::update(sf::Time dt)
 		* division /: towards left/up
 		*/
 		// X axis ##########
-		if (!reachedXLeft)
-		{
-			if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
-			{
-				std::cout << "R IF " << mousePosition.x << std::endl;
-				reachedXRight = false;
-				aimSprite.setPosition(mousePosition.x, mousePosition.y);
-			}
-			else
-			{
-				// std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
-				reachedXRight = true;
-				// keep sliding perpendiclualry
-				aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y); // THIS LINE IS REPEATED !!!
-			}
-			std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
-		}
-		if (!reachedXRight)
-		{
-			// std::cout << "L IF CALC: " << aimSprite.getPosition().x << " " << astronautSprt.getPosition().x / 1.5 << std::endl;
-			if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
-			{
-				std::cout << "L IF " << mousePosition.x << std::endl;
-				reachedXLeft = false;
-				aimSprite.setPosition(mousePosition.x, mousePosition.y);
-			}
-			else
-			{
-				std::cout << "L ELSE " << mousePosition.x << std::endl;
-				reachedXLeft = true;
-				// keep sliding perpendiclualry
-				aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
-			}
-		}
+		//if (!reachedXLeft)
+		//{
+		//	if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
+		//	{
+		//		std::cout << "R IF " << mousePosition.x << std::endl;
+		//		reachedXRight = false;
+		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//	}
+		//	else
+		//	{
+		//		// std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
+		//		reachedXRight = true;
+		//		// keep sliding perpendiclualry
+		//		aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y); // THIS LINE IS REPEATED !!!
+		//	}
+		//	std::cout << "R ELSE " << mousePosition.x << " " << reachedXRight << std::endl;
+		//}
+		//if (!reachedXRight)
+		//{
+		//	// std::cout << "L IF CALC: " << aimSprite.getPosition().x << " " << astronautSprt.getPosition().x / 1.5 << std::endl;
+		//	if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
+		//	{
+		//		std::cout << "L IF " << mousePosition.x << std::endl;
+		//		reachedXLeft = false;
+		//		aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//	}
+		//	else
+		//	{
+		//		std::cout << "L ELSE " << mousePosition.x << std::endl;
+		//		reachedXLeft = true;
+		//		// keep sliding perpendiclualry
+		//		aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
+		//	}
+		//}
 		// #################
+		
+		sf::Vector2f astroTest = astronautSprt.getPosition();
+		sf::Vector2f aimTest = aimSprite.getPosition();
+		float distance = std::hypot(mousePosition.x - astroTest.x, mousePosition.y - astroTest.y);
+		if (distance >= 200) 
+		{
+			std::cout << "POLLO" << std::endl;
+			aimSprite.setPosition(aimSprite.getPosition().x, aimSprite.getPosition().y);
+		}
+		else
+		{
+			aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		}
+		//std::cout << reachedYUp << " " << reachedXRight << " " << reachedYDown << " " << reachedXLeft << std::endl;
+		//if (!reachedYUp && !reachedXRight && !reachedYDown && !reachedXLeft)
+		//{
+		//	aimSprite.setPosition(mousePosition.x, mousePosition.y);
+		//	if (aimSprite.getPosition().x > astronautSprt.getPosition().x * 1.5 || mousePosition.x > aimSprite.getPosition().x)
+		//	{
+		//		reachedXRight = true;
+		//	}
+		//	if (aimSprite.getPosition().x < astronautSprt.getPosition().x / 1.5 || mousePosition.x < aimSprite.getPosition().x)
+		//	{
+		//		reachedXLeft = true;
+		//	}
+		//	if (aimSprite.getPosition().y > astronautSprt.getPosition().y * 1.5 || mousePosition.y > aimSprite.getPosition().y)
+		//	{
+		//		reachedYDown = true;
+		//	}
+		//	if (aimSprite.getPosition().y < astronautSprt.getPosition().y / 1.5 || mousePosition.y < aimSprite.getPosition().y)
+		//	{
+		//		reachedYUp = true;
+		//	}
+		//}
+		//else
+		//{
+		//	if (reachedXRight || reachedXLeft)
+		//	{
+		//		aimSprite.setPosition(aimSprite.getPosition().x, mousePosition.y);
+		//	}
+		//	if (reachedYUp || reachedYDown)
+		//	{
+		//		aimSprite.setPosition(mousePosition.x, aimSprite.getPosition().y);
+		//	}
+		//	
+		//	if (aimSprite.getPosition().x < astronautSprt.getPosition().x * 1.5 || mousePosition.x < aimSprite.getPosition().x)
+		//	{
+		//		reachedXRight = false;
+		//	}
+		//	if (aimSprite.getPosition().x > astronautSprt.getPosition().x / 1.5 || mousePosition.x > aimSprite.getPosition().x)
+		//	{
+		//		reachedXLeft = false;
+		//	}
+		//	if (aimSprite.getPosition().y < astronautSprt.getPosition().y * 1.5 || mousePosition.y < aimSprite.getPosition().y)
+		//	{
+		//		reachedYDown = false;
+		//	}
+		//	if (aimSprite.getPosition().y > astronautSprt.getPosition().y / 1.5 || mousePosition.y > aimSprite.getPosition().y)
+		//	{
+		//		reachedYUp = false;
+		//	}
+		//}
 
 		// Y axis #########
 		//if (!reachedYDown)
